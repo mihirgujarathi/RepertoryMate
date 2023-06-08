@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Doctor's Signup</title>
+    <link rel="stylesheet" href=" {% static 'css/signup.css' %}" />
+    <script src="{% static 'js/signup.js'%}" defer></script>
+    <script src="https://kit.fontawesome.com/e7b026b0c8.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="container">
+        <!-- <div class="form-container"> -->
+        <form action="{% url 'doctor_signup' %}" data-multi-step class="multi-step-form main-form" method="POST">
+            {% csrf_token %}
+            <!-- <div class="upper">
+                    <h2>Register as Doctor</h2>
+                </div> -->
+
+            <div class="card" data-step>
+
+                <h2 class="step-title">Register as Doctor</h2>
+
+                <div class="form-group">
+                    <input type="text" id="username" name="username" minlength="3" class="text-input" autocomplete="off"
+                        placeholder="Enter your Username" required onkeyup="check_username()" />
+                    <label for="username" class="label">Username</label>
+                </div>
+
+                <div class="form-group">
+                    <input type="text" id="firstName" name="firstname" minlength="3" class="text-input" autocomplete="off"
+                        placeholder="Enter your first name" required />
+                    <label for="firstName" class="label">First Name</label>
+                </div>
+
+
+                <div class="form-group">
+                    <input type="text" id="lastName" name="lastname" class="text-input" autocomplete="off"
+                        placeholder="Enter your last name" />
+                    <label for="lastName" class="label">Last Name</label>
+                </div>
+
+                <div class="form-group">
+                    <input type="password" id="password" name="password" class="text-input" autocomplete="off"
+                        placeholder="Create a strong password" required onkeyup="check_password()" />
+                    <label for="password" class="label">Password</label>
+                </div>
+
+                <div class="form-group">
+                    <input type="password" id="confirm_password" name="confirm_password" class="text-input"
+                        autocomplete="off" placeholder="Re-enter your password" required onkeyup="check_password()" />
+                    <label for="confirm_password" class="label">Confirm Password</label>
+                </div>
+
+                <div class="form-group card_bottom">
+                    <p class="error" id="error1"></p>
+                    <button type="button" data-next id="next1">Next</button>
+                </div>
+
+            </div>
+
+            <div class="card" data-step>
+
+                <h2 class="step-title">Personal Details</h2>
+
+                <div class="form-group">
+                    <input type="email" id="email" class="text-input" autocomplete="off" name="email"
+                        placeholder="Enter your Email address" required onkeyup="check_email()" />
+                    <label for="email" class="label">Email</label>
+                </div>
+
+                <div class="form-group">
+                    <input type="tel" id="mobile" class="text-input" pattern="[6-9]{1}[0-9]{9}" autocomplete="off" name="contact_number"
+                        placeholder="Enter 10 digit mobile number" required />
+                    <label for="mobile" class="label">Mobile number</label>
+                </div>
+
+                <div class="form-group">
+                    <input type="date" id="age" class="text-input" name="date_of_birth" required />
+                    <label for="age" class="label">Date of birth</label>
+                </div>
+
+                <div class="form-group">
+                    <div class="radiobutton">
+                        <h3>Your sex:</h3>
+                        <input type="radio" id="male" name="sex" class="radio-input" value="male" required />
+                        <label for="male" class="radiobtn">Male</label> <br />
+
+                        <input type="radio" id="female" name="sex" class="radio-input" value="female" required />
+                        <label for="female" class="radiobtn">Female</label> <br />
+
+                        <input type="radio" id="other" name="sex" class="radio-input" value="other" required />
+                        <label for="other" class="radiobtn">Others</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <input type="text" id="address" class="text-input" name="address" minlength="3" placeholder="Permanent address"
+                        required />
+                    <label for="address" class="label">Address</label>
+                </div>
+
+                <div class="form-group">
+                    <div class="radiobutton">
+                        <h3>Marital status</h3>
+                        <input type="radio" id="married" name="marital_status" class="radio-input" value="married"
+                            required />
+                        <label for="married" class="radiobtn">Married</label> <br />
+
+                        <input type="radio" id="unmarried" name="marital_status" class="radio-input" value="unmarried"
+                            required />
+                        <label for="unmarried" class="radiobtn">Unmarried</label>
+                    </div>
+                </div>
+
+                <div class="form-group card_bottom2">
+
+                    <button type="button" data-previous id="previous1">Previous</button>
+                    <p id="error2"></p>
+                    <button type="button" data-next id="next2">Next</button>
+                </div>
+            </div>
+
+            <div class="card" data-step>
+                <h2 class="step-title">Profession Details</h2>
+
+                <div class="form-group">
+                    <input type="text" id="specialization" class="text-input" name="specialization"
+                        placeholder="Mention your Specialization" maxlength="20" required />
+                    <label for="specialization" class="label">Specialization</label>
+                </div>
+
+                <div class="form-group">
+                    <input type="text" id="qualification" class="text-input" name="qualification"
+                        placeholder="Mention your Qualification" maxlength="20" required />
+                    <label for="qualification" class="label">Qualification</label>
+                </div>
+
+                <div class="form-group">
+                    <input type="text" id="hospital_name" class="text-input" name="hospital_name"
+                        placeholder="Mention your Hospital Name" required />
+                    <label for="hospital_name" class="label">Hospital Name</label>
+                </div>
+
+                <div class="form-group card_bottom3">
+                    <button type="button" data-previous>Previous</button>
+                    <button type="submit">Submit</button>
+                </div>
+
+        </form>
+        <!-- </div> -->
+    </div>
+
+    <script>
+        var all_user = {{ all_usernames| safe}};
+        var all_mail = {{ user_email_array| safe}};
+        var error1 = document.getElementById("error1");
+        var error2 = document.getElementById("error2");
+        var pass1 = document.getElementById('password');
+        var pass2 = document.getElementById('confirm_password');
+        var next1 = document.getElementById('next1');
+        var next2 = document.getElementById('next2');
+        var previous1 = document.getElementById('previous1');
+
+
+        function check_username() {
+            myuser = document.getElementById("username");
+
+            if (all_user.includes(myuser.value)) {
+                error1.innerHTML = "Username is taken";
+                next1.style.display = "none";
+            }
+            else if (myuser.value.includes("@")) {
+                error1.innerHTML = "@ cannot be in username";
+                next1.style.display = "none";
+            }
+            else {
+                error1.innerHTML = "";
+                next1.style.display = "block";
+            }
+        }
+
+        function check_email() {
+            myemail = document.getElementById("email");
+
+            if (all_mail.includes(myemail.value)) {
+                error2.innerHTML = "Email address already exists in our system";
+                next2.style.display = "none";
+                previous1.style.display = "none";
+            }
+            else {
+                error2.innerHTML = "";
+                next2.style.display = "block";
+                previous1.style.display = "block";
+            }
+        }
+
+        function check_password() {
+
+            pass_length = false;
+            pass_match = false
+
+            if (pass1.value.length > 6) {
+                pass_length = true;
+            }
+
+            if (pass1.value == pass2.value) {
+                pass_match = true;
+            }
+
+            if (!pass_length) {
+                error1.innerHTML = "Password should be greater than 6 characters";
+                next1.style.display = "none";
+            }
+            else if (!pass_match) {
+                error1.innerHTML = "Passwords do not match";
+                next1.style.display = "none";
+            }
+            else {
+                error1.innerHTML = "";
+                next1.style.display = "block";
+            }
+
+        }
+
+        function set_sports_text() {
+
+            x = document.getElementById("yes").checked;
+            if (x == true) {
+                document.getElementById("sports_field").required = true;
+            }
+
+        }
+
+        function remove_sports_text() {
+
+            document.getElementById("sports_field").required = false;
+
+        }
+    </script>
+
+</body>
+
+</html>

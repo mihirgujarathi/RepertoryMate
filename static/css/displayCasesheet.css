@@ -1,0 +1,362 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");
+
+* {
+  margin: 0px;
+  box-sizing: border-box;
+  padding: 0;
+  font-family: "Nunito", sans-serif;
+}
+
+body {
+  color: #dddddd;
+  background: #1e1a20;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  max-width: 60%;
+  margin: auto;
+}
+
+.casesheet_container {
+  width: 90%;
+}
+
+.record {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  height: 40px;
+  margin: 10px;
+}
+
+.record:nth-child(even) {
+  background-color: #36323c;
+}
+
+h2 {
+  margin-top: 25px;
+  max-width: 60%;
+}
+
+input {
+  /* padding: 0.5rem; */
+  padding: 10px 25px;
+  width: auto;
+  border: none;
+  border-bottom: 2px solid #38f2ff;
+  border-radius: 12px;
+  background: #2a7fba;
+  outline: none;
+  color: white;
+  margin: 10px;
+}
+
+input::placeholder {
+  color: whitesmoke;
+}
+
+
+
+
+
+
+.form_btn{
+  position: relative;
+  padding: 1em 1.8em;
+  outline: none;
+  border: 1px solid #303030;
+  background: #212121;
+  color: #ae00ff;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 15px;
+  overflow: hidden;
+  transition: 0.2s;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.form_btn:hover {
+  box-shadow: 0 0 10px #ae00ff, 0 0 25px #001eff, 0 0 50px #ae00ff;
+  transition-delay: 0.6s;
+}
+
+.form_btn span {
+  position: absolute;
+}
+
+.form_btn span:nth-child(1) {
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #ae00ff);
+}
+
+.form_btn:hover span:nth-child(1) {
+  left: 100%;
+  transition: 0.7s;
+}
+
+.form_btn span:nth-child(3) {
+  bottom: 0;
+  right: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #001eff);
+}
+
+.form_btn:hover span:nth-child(3) {
+  right: 100%;
+  transition: 0.7s;
+  transition-delay: 0.35s;
+}
+
+.form_btn span:nth-child(2) {
+  top: -100%;
+  right: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(180deg, transparent, #ae00ff);
+}
+
+.form_btn:hover span:nth-child(2) {
+  top: 100%;
+  transition: 0.7s;
+  transition-delay: 0.17s;
+}
+
+.form_btn span:nth-child(4) {
+  bottom: -100%;
+  left: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(360deg, transparent, #001eff);
+}
+
+.form_btn:hover span:nth-child(4) {
+  bottom: 100%;
+  transition: 0.7s;
+  transition-delay: 0.52s;
+}
+
+.form_btn:active {
+  background: #ae00af;
+  background: linear-gradient(to top right, #ae00af, #001eff);
+  color: #bfbfbf;
+  box-shadow: 0 0 8px #ae00ff, 0 0 8px #001eff, 0 0 8px #ae00ff;
+  transition: 0.1s;
+}
+
+.form_btn:active span:nth-child(1) span:nth-child(2) span:nth-child(2) span:nth-child(2) {
+  transition: none;
+  transition-delay: none;
+}
+
+
+
+
+
+.view_btn {
+  background: transparent;
+  color: #1cdada;
+  font-weight: 400;
+  text-transform: uppercase;
+  padding: 8px 16px;
+  border: 2px solid #1cdada;
+  border-radius: 32px;
+  transform: translate(0);
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.view_btn::before {
+  content: "";
+  position: absolute;
+  background: #1cdada;
+  width: 8px;
+  top: 0;
+  bottom: 0;
+  left: -16px;
+  transform: rotate(-16deg);
+  filter: blur(6px);
+}
+
+.view_btn:hover::before {
+  left: calc(100% + 16px);
+  transition: 0.75s;
+}
+
+.delete_btn {
+  padding: 5px;
+  background: transparent;
+  border: none;
+  color: rgb(255, 0, 0);
+}
+
+.viewbtn {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+.error {
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 800;
+  font-size: large;
+  color: rgb(255, 53, 53);
+}
+
+.fa-triangle-exclamation {
+  /* margin-top: 2px; */
+  margin-right: 4px;
+  font-size: x-large;
+}
+
+li::marker {
+  content: '👉';
+}
+
+.result_casesheet {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+}
+
+.result_casesheet>.answer:nth-child(4n+1),
+.result_casesheet>.answer:nth-child(4n+2),
+.result_casesheet>.question:nth-child(4n+1),
+.result_casesheet>.question:nth-child(4n+2) {
+  background-color: #36323c;
+}
+
+.question {
+  color: #1cdada;
+  font-weight: 800;
+  font-size: 18px;
+}
+
+.answer {
+  color: white;
+}
+
+.result_casesheet p {
+  padding: 10px;
+}
+
+.blur {
+  filter: blur(2px);
+  pointer-events: none;
+}
+
+.dialogue-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  z-index: 4;
+  transition: 0.2s ease-in-out;
+  border-radius: 18px;
+  padding: 16px 32px;
+  background-color: #363b59;
+}
+
+.box {
+  padding: 1rem;
+  border-radius: 1rem;
+}
+
+.box h4 {
+  color: white;
+  text-align: center;
+}
+
+.box-btn {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-top: 1.5rem;
+}
+
+.box button {
+  border: none;
+  border-radius: 0.5rem;
+  background-color: #8388a4;
+  padding: 0.5rem;
+  font-size: 1rem;
+  color: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.box button[type=submit] {
+  background-color: #ed5e68;
+}
+
+.pdf_buttons {
+  /* display: flex;
+  align-items: center;
+  justify-content: center; */
+  width: 50%;
+  margin: 1rem auto 2rem;
+  /* background-color: #2a7fba; */
+}
+
+.card {
+  margin-top: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.fa-2xl {
+  position: absolute;
+  top: 5%;
+  left: 3%;
+}
+
+@media only screen and (max-width: 550px) {
+  .container {
+    width: 90%;
+  }
+
+  .pdf_buttons {
+    font-size: 0.8rem;
+    width: 50%;
+    margin: 1rem auto 2rem;
+  }
+}
+
+@media only screen and (max-width: 510px) {
+  .pdf_buttons {
+    font-size: 8px;
+    width: 50%;
+    margin: 1rem auto 2rem;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .container {
+    max-width: 100%;
+  }
+
+  .container h2 {
+    text-align: center;
+  }
+
+  #main_form .input_fields {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+{% load post_tags %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#4285f4" />
+    <title>BBCR Chatbot</title>
+    <link rel="stylesheet" href="{% static 'css/displayCasesheet.css' %}">
+    <script src="https://kit.fontawesome.com/e7b026b0c8.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <div class="dialogue-box">
+        <div class="box">
+            <h4>You will not be able to access this casesheet anymore!</h4>
+            <h4>Are you sure you want to delete this record.</h4>
+            <form method="POST" class="box-btn" onsubmit="event.preventDefault();" id="delete_form">
+                {% csrf_token %}
+                <button onclick="del()" type="submit">DELETE</button>
+                <button onclick="closeBox()">CANCEL</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="container">
+
+        {%if not casesheetname%}
+
+        <h2>Your casesheet will be displayed here</h2>
+        <form method="POST" action="{%url 'display_casesheet'%}" id="main_form">
+            {% csrf_token %}
+            <input type="text" name="casesheetname" placeholder="Enter your casesheet" />
+            <button class="form_btn">
+                View
+            </button>
+            {%if error_message%}
+            <div class="error"> <i class="fa-solid fa-triangle-exclamation"></i>{{error_message}}</div>
+            {%endif%}
+
+            <input type="hidden" name="selected_casesheet" id="selected_casesheet">
+            <input type="hidden" name="delete_casesheet" id="delete_casesheet">
+        </form>
+
+        <a href="{%url 'go_home'%}"><i class="fa-solid fa-house fa-2xl" style="color: #ffffff;"></i> </a>
+
+
+        <div class="casesheet_container">
+
+            {% for record in all_dict %}
+            <div class="record">
+                <div class="record_name"> {{record.case_sheet_name}} </div>
+                <div class="record_buttons">
+                    <button class="view_btn" onclick="select_casesheet({{record.id}})" type="button">View</button>
+                    <button class="delete_btn" onclick="openBox({{record.id}})" type="button">Delete</button>
+                </div>
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+
+        {%else%}
+
+        <!-- ODD = QUESTION || EVEN = ANNSWERS -->
+
+        <h1>Casesheet name: {{casesheetname}}</h1>
+        <div class="result_casesheet">
+
+            {% for key, value in returndict.items %}
+            {% if value != None %}
+
+            {% if '$' in value %}
+
+            <div class="answer">
+                {% for point in value|split:"$" %}
+                <li>{{point}}</li>
+                {% endfor %}
+            </div>
+
+            {% else %}
+
+            {% if value|first == "Q" %}
+
+            <p class="question">{{value}}</p>
+
+            {% else %}
+
+            <p class="answer">{{value}}</p>
+
+            {% endif %}
+
+            {% endif %}
+
+            {% endif %}
+
+            {% endfor %}
+
+            <button class="view_btn pdf_buttons" onclick="view_pdf()">View PDF</button>
+            <button class="view_btn pdf_buttons" onclick="download_pdf()">Download PDF</button>
+        <!-- </div> -->
+        {% if doctor %}
+
+        <script></script>
+        <script>
+            var arr = {{medicine_scores|safe}};
+            console.log(arr)
+        </script>
+
+        <h1>Medicine</h1>
+        <h1>Scores</h1>
+        <!-- <div class="result_casesheet"> -->
+            {% for key, value in medicine_scores.items %}
+
+            <p class="question">{{key}}</p>
+            <p class="answer">{{value}}</p>
+
+            {%endfor%}
+        </div>
+
+        {%endif%}
+
+
+        {%endif%}
+
+    </div>
+
+
+    <script defer>
+
+        function openBox(id) {
+
+            document.getElementById("delete_casesheet").value = id;
+            document.getElementById("selected_casesheet").value = "";
+            document.querySelector(".dialogue-box").style.transform = "translate(-50% , -50%) scale(1)";
+            document.querySelector(".container").classList.add("blur");
+        }
+
+        function closeBox() {
+            document.querySelector(".dialogue-box").style.transform = "translate(-50% , -50%) scale(0)";
+            document.querySelector(".container").classList.remove("blur");
+        }
+
+        function select_casesheet(id) {
+            console.log("SELECT");
+            document.getElementById("delete_casesheet").value = "";
+            document.getElementById("selected_casesheet").value = id;
+            document.getElementById('main_form').submit();
+        }
+
+        function del() {
+            document.getElementById('main_form').submit();
+        }
+
+        function view_pdf() {
+            {% if obj_id %}
+            location.href = "{% url 'pdf_view' obj_id %}";
+            {% endif %}
+        }
+
+        function download_pdf() {
+            {% if obj_id %}
+            location.href = "{% url 'pdf_download' obj_id %}";
+            {% endif %}
+        }
+
+    </script>
+    </div>
+</body>
+
+</html>

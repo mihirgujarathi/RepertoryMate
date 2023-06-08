@@ -1,0 +1,179 @@
+
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+{% load post_tags %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Casesheet</title>
+    <link rel="stylesheet" href=" {% static 'css/edit.css' %}" />
+</head>
+<body>
+
+    <form action="{% url 'edit_casesheet' obj_id %}" method="POST">
+        <div id="main_container">
+                {% csrf_token %}
+                <div id="information_container">
+                    <h2>THIS IS EDIT CASESHEET for ID {{obj_id}}</h2>
+                    <h2>CASE SHEET NAME: {{casesheetname}}</h2>
+                    <h2>Patient Name: {{patient_user}}</h2>
+                    <button onclick="update_values(event)">Update</button>
+            </div>
+            <div class="options_div">
+                <div id="all_single_option_container"></div>
+                <div id="all_multiple_option_container"></div>
+            </div>
+        </div>
+    </form>
+
+
+        {% for key, value in data_dict.items %}
+            {% if value != None and value != "" %}
+
+            {% if '$' in value %}
+
+            <div class="one_question_all_multiple_select">
+                {% for point in value|split:"$" %}
+
+                <select class="select_all multiple_select">
+                    <option>{{point}}</option>
+                </select>
+
+                {% endfor %}
+            </div>
+
+                
+            </div>
+
+            {% else %}
+
+            {% if value|first == "Q" %}
+
+            <div id='SELECT_{{value|split:"."|first}}' class="question_div">
+                <input type="text" name='OPTIONS_{{value|split:"."|first}}' id='OPTIONS_{{value|split:"."|first}}'>
+            <p class="question">{{value}}</p>
+            {% else %}
+
+            <select class="select_all single_select">
+                <option>{{value}}</option>
+            </select>
+            
+            </div>
+
+            {% endif %}
+
+            {% endif %}
+
+            {% endif %}
+
+            {% endfor %}
+
+    <script>
+
+        var hyphen_select = document.querySelectorAll(".select_all");
+        var single_option_container = document.getElementById("all_single_option_container");
+        var multiple_option_container = document.getElementById("all_multiple_option_container");
+
+        var single_select = document.querySelectorAll(".single_select");
+        single_select.forEach(element=>{
+            var element_id = element.parentNode.id;
+            var q_no = element_id.replace("SELECT_Q","");
+            if(parseInt(q_no)>25){
+                multiple_option_container.appendChild(element.parentNode)     ;       
+            }
+            else {
+                single_option_container.appendChild(element.parentNode)            
+            }
+        });
+
+        var multiple_select = document.querySelectorAll(".multiple_select");
+        multiple_select.forEach(element=>{
+            multiple_option_container.appendChild(element.parentNode.parentNode)     ;       
+        });
+
+        // console.log(hyphen_select[4]);
+        // document.getElementById("try").appendChild(hyphen_select[4]);
+
+
+        for(var i=0; i < hyphen_select.length; i++){
+            var val = (hyphen_select[i].children[0].label);
+            // console.log(val);
+            temp = val.split("->");
+
+            while(temp.length > 1){
+            temp = temp.slice(0, -1);
+            var arrow = temp.join("->");
+
+            // console.log(hyphen_select[i].classList);
+            hyphen_select[i].classList.add("arrow_class");
+
+            var opt = document.createElement("option");
+            opt.text = arrow;
+            hyphen_select[i].add(opt);
+            }
+            // console.log("----------");
+
+        }
+
+        function fill_val(all_questions) {
+            for(var i=0; i < all_questions.length; i++){
+                var all_select_tags = all_questions[i].children[2];
+                var current_q = all_questions[i].id;
+                current_q = current_q.replace("SELECT_","");
+                var hidden_input_box_name = "OPTIONS_" + current_q;
+                console.log(current_q);
+                
+                // console.log(all_select_tags)
+                
+                if(all_select_tags.length == 1){
+                    // for single option
+                    document.getElementById(hidden_input_box_name).value = all_select_tags.value
+                }
+                else {
+                    //for multi option
+                    var ans = [];
+                    all_select_tags = all_select_tags.children
+                    let select_values_arr = Object.values(all_select_tags);
+                    // console.log(select_values_arr);
+                    select_values_arr.forEach((value)=> {
+                        ans.push(value.value);
+                    });
+                    // console.log(ans)
+                    ans = ans.join("$");
+                    document.getElementById(hidden_input_box_name).value = ans;
+                    if(current_q=="Q28")
+                        alert(ans);
+                }
+            }
+        }
+
+        function update_values(event){
+            var all_single_questions = document.getElementById("all_single_option_container");
+            var all_multiple_questions = document.getElementById("all_multiple_option_container");
+            all_single_questions = all_single_questions.children;
+            all_multiple_questions = all_multiple_questions.children;
+
+            fill_val(all_single_questions);
+            fill_val(all_multiple_questions);
+            
+            
+            // event.preventDefault();
+        }
+    
+
+        // function update_values(){
+            // var ans = [];
+            
+            // var q27 = document.querySelector(".SELECT_Q27");
+            // var all_select_tags = q27.children[1].children;
+            // let select_values_arr = Object.values(all_select_tags);
+            // select_values_arr.forEach((value)=> {
+                //     ans.push(value.value);
+                // });
+        // }
+
+    </script>
+</body>
+</html>

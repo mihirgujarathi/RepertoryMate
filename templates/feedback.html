@@ -1,0 +1,78 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback</title>
+    <link rel="stylesheet" href=" {% static 'css/feedback.css' %}" />
+    <script src="https://kit.fontawesome.com/e7b026b0c8.js" crossorigin="anonymous"></script>
+</head>
+
+<body> 
+    <a href="{%url 'go_home'%}"><i class="fa-solid fa-house fa-2xl" style="color: #ffffff;"></i> </a>
+
+        <div class="card shadow">
+            <span class="title">Feedback</span>
+            <form class="form"  method="POST" action="{% url 'feedback' %}">
+                {% csrf_token %}
+              <div class="group">
+              <input placeholder="‎" type="text" name="topic" id="topic" required="">
+              <label for="topic">Enter your feedback topic here</label>
+              </div>
+          <div class="group">
+              <textarea placeholder="‎" id="comment" name="feedback" rows="5" required=""></textarea>
+              <label for="comment">Comment</label>
+          </div>
+          <button>
+            <div class="svg-wrapper-1">
+              <div class="svg-wrapper">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                  <path fill="none" d="M0 0h24v24H0z"></path>
+                  <path fill="currentColor" d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"></path>
+                </svg>
+              </div>
+            </div>
+            <span>Send</span>
+          </button>
+            </form>
+            {% if submitted %}
+
+            <p id="demo">
+               
+            </p>
+            <script defer>
+                var i = 0;
+                var txt = ' Your suggestion on the topic, "{{topic}}" has been submitted';
+                var speed = 50;
+                
+                function typeWriter() {
+                  if (i < txt.length) {
+                    document.getElementById("demo").innerHTML += txt.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, speed);
+                  }
+                }
+                typeWriter();
+                </script>
+            {% endif %}
+          </div>
+
+    </form>
+    
+</body>
+
+</html>
+
+
+
+
+  
+
+
+
+
+  
+

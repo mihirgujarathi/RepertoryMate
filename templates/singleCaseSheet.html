@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+{% load static %}
+{% load post_tags %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casesheet: {{casesheetname}}</title>
+    <style>
+        h1{
+            text-align: center;
+        }
+
+        td,
+        th {
+            border: 1px solid #777;
+            padding: 0.5rem;
+            text-align: center;
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        tbody tr:nth-child(odd) {
+            background: lightblue;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Casesheet name: {{casesheetname}}</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Question</th>
+                <td>Answers</td>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for key, value in returndict.items %}
+            {% if value != None %}
+
+            {% if '$' in value %}
+
+            <td>
+                <div class="answer">
+                    {% for point in value|split:"$" %}
+                    <li>{{point}}</li>
+                    {% endfor %}
+                </div>
+            </td>
+
+            </tr>
+
+            {% else %}
+
+            {% if value|first == "Q" %}
+            <tr>
+                <td>
+                    <p class="question">{{value}}</p>
+                </td>
+
+                {% else %}
+                <td>
+                    <p class="answer">{{value}}</p>
+                </td>
+            </tr>
+
+            {% endif %}
+
+            {% endif %}
+
+            {% endif %}
+
+            {% endfor %}
+        </tbody>
+    </table>
+
+</body>
+
+</html>

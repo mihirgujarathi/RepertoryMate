@@ -1,0 +1,200 @@
+{%load static%}
+{% load post_tags %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Questions</title>
+  <script src="https://kit.fontawesome.com/4ac9ddbdf6.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href=" {% static 'css/type1.css' %}" />
+</head>
+
+<body>
+  <form method="POST" action="" id="questionform" class="container">
+    <div class="heading-container"> Your Case Sheet Name: {{returndict.casesheetname}} </div>
+    <div class="message-container">
+      {% csrf_token %}
+      <input type="hidden" value="{{returndict.casesheetname}}" name="currentscasesheetname" />
+      <input type="hidden" value="{{returndict.question}}" name="current_question" />
+
+
+      <div class="bot messagebox">Welcome {{request.user.first_name}}</div>
+      <div class="bot messagebox">Enter the name of your casesheet</div>
+      <div class="user messagebox">{{returndict.casesheetname}}</div>
+
+      {% for key, value in data_dict.items %}
+
+      {% if value != None %}
+
+      {% if '$' in value %}
+
+      <div class="option_tab">
+        {% for point in value|split:"$" %}
+        <div class="user messagebox">{{point}}</div>
+        {% endfor %}
+      </div>
+
+      {% else %}
+
+      {% if value|first == "Q" %}
+
+      <div class="bot messagebox">{{value}}</div>
+
+      {% else %}
+
+      <div class="user messagebox">{{value}}</div>
+
+      {% endif %}
+
+      {% endif %}
+
+      {% endif %}
+
+      {% endfor %}
+
+
+
+
+      {% for item in returndict.options %}
+      <input type="hidden" value="{{item.0}}" name="old_option">
+
+
+      {% if item.1|length > 1 %}
+
+      <div class="bot messagebox singleQ" id="current_question">You selected "{{item.0}}" option for the question,
+        "{{returndict.question}}" <br />
+        You need to additionally select subrubrics from the following:</div>
+
+      <div class="option_tab">
+        {% for option in item.1 %}
+        <div class="radio all_options_div">
+          <label class="label user messagebox single" id="label-{{item.0}}:{{option}}"> {{option}}
+            <input type="radio" name="{{item.0}}" value="{{option}}" id="{{item.0}}:{{option}}" class="all_options"
+              onclick="selectBut(name, id)" required />
+        </div>
+        {% endfor %}
+      </div>
+
+      {% else %}
+
+        {% for option in item.1 %}
+        <div class="all_options_div" style="display: none;">
+          <label class="" id="label-{{item.0}}:{{option}}"> {{option}}
+            <input type="radio" name="{{item.0}}" value="{{option}}" id="{{item.0}}:{{option}}" class="all_options"
+              onclick="selectBut(name, id)" required checked/>
+        </div>
+        {% endfor %}
+
+      {% endif %}
+
+      {% endfor %}
+
+
+
+
+
+      <div class="user messagebox hide" id="empty_search">No results found</div>
+
+    </div>
+
+    <div class="input-bar">
+      <input type="text" class="input-box" placeholder="Message here..." id="input-box" onkeyup="filter_options()">
+      <button class="send-btn" onclick="updateAction()">
+        <i class="fa-regular fa-paper-plane"></i>
+      </button>
+    </div>
+  </form>
+
+
+  <script>
+
+    document.getElementById('current_question').scrollIntoView()
+
+    var all_options_div = document.getElementsByClassName("all_options_div");
+    var input_box = document.getElementById('input-box');
+
+    function filter_options() {
+
+      for (i = 0; i < all_options_div.length; i++) {
+        all_options_div[i].style.display = "block";
+      }
+      document.getElementById("empty_search").classList.add("hide");
+      if (input_box.value == "") {
+        return;
+      }
+
+      // Actual filter
+      for (i = 0; i < all_options_div.length; i++) {
+        var opt_value = all_options_div[i].childNodes[1].id;
+        opt_value = opt_value.substring(6);
+        opt_value = opt_value.toLowerCase()
+        if (!opt_value.includes(input_box.value.toLowerCase())) {
+          all_options_div[i].style.display = "none";
+        }
+      }
+
+      // If no results found for every element
+      var all_blank = false
+      for (i = 0; i < all_options_div.length; i++) {
+        if (all_options_div[i].style.display != "none") {
+          all_blank = true;
+        }
+      }
+      if (all_blank == false)
+        document.getElementById("empty_search").classList.remove("hide");
+    }
+
+    function updateAction() {
+      console.log("Hello");
+      var fname = document.getElementById("questionform");
+      var qname = "{{returndict.question_name}}";
+      qname = qname.toLowerCase();
+      qname = qname.replace("question", "q")
+      var actionlink = "{% url 'go_home' %}" + "main/sub_rubric_handler_" + qname + "/";
+      fname.action = actionlink;
+      fname.setAttribute("name", "btnSubmit");
+    }
+
+    var currentRadioSelection = {};
+
+    function selectBut(name, id) {
+      input_box.value = id;
+      console.log(name);
+
+      var ele = document.getElementsByName(name);
+      // console.log(ele);
+
+      for (i = 0; i < ele.length; i++) {
+        if (ele[i].checked) {
+          if (currentRadioSelection[name] != undefined) {
+            currentRadioSelection[name].style.backgroundColor = "transparent";
+            currentRadioSelection[name].style.color = "black";
+          }
+          currentRadioSelection[name] = ele[i].parentElement;
+
+          console.log(currentRadioSelection);
+          console.log(currentRadioSelection[name]);
+
+          currentRadioSelection[name].style.backgroundColor = "#2bbebe";
+          currentRadioSelection[name].style.color = "white";
+        }
+      }
+      // console.log("Current: " + currentRadioSelection);
+      // var custom_item = "label-" + id;
+      // var result = document.getElementById(custom_item);
+      // if (currentRadioSelection != undefined) {
+      //   currentRadioSelection.style.backgroundColor = "transparent";
+      //   currentRadioSelection.style.color = "black";
+      // }
+      // currentRadioSelection = result;
+      // currentRadioSelection.style.backgroundColor = "#ff6b6b";
+      // currentRadioSelection.style.color = "white";
+    }
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+{% load post_tags %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/displayCasesheet.css' %}">
+    <script src="https://kit.fontawesome.com/e7b026b0c8.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <div class="container">
+
+        {%if not casesheetname%}
+
+        <h2>You can search for a specific casesheet by using the casesheet name along with the patient's username</h2>
+        <span> Patient's username is required </span>
+        <form method="POST" action="{%url 'display_casesheet'%}" id="main_form">
+            {% csrf_token %}
+            <div class="input_fields">
+                <input type="text" name="patient_username" placeholder="Patient's Username" required />
+                <!-- EXACT CASESHEET NAME IS REQUIRED -->
+                <input type="text" name="patient_casesheetname" placeholder="Patient's Casesheet Name" />
+            </div>
+            <div class="viewbtn">
+                <button class="form_btn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span> Check
+                  </button>
+            </div>
+
+            {%if error_message%}
+            <div class="error"> <i class="fa-solid fa-triangle-exclamation"></i>{{error_message}}</div>
+            {%endif%}
+            <br><br>
+
+            <input type="hidden" name="selected_casesheet" id="selected_casesheet" value="">
+            <input type="hidden" name="dr_edit" id="dr_edit" value="">
+        </form>
+
+        <a href="{%url 'go_home'%}"><i class="fa-solid fa-house fa-2xl" style="color: #ffffff;"></i> </a>
+
+        <!-- FOR PATIENT'S EVERY CASESHEET -->
+        <div class="casesheet_container">
+            {% if patient_records %}
+            {% for record in patient_records %}
+            <div class="record">
+
+                <div class="record_name">{{record}} </div>
+
+                <div class="record_buttons">
+
+                    <button class="view_btn" onclick="function select_casesheet(){
+                                document.getElementById('selected_casesheet').value = {{record.id}};
+                                document.getElementById('main_form').submit();
+                                };select_casesheet()" type="button">View</button>
+
+                    <button class="view_btn" onclick="function select_casesheet(){
+                                document.getElementById('dr_edit').value = {{record.id}};
+                                document.getElementById('main_form').submit();
+                                };select_casesheet()" type="button">Edit</button>
+
+                </div>
+
+            </div>
+            {% endfor %}
+            {% endif %}
+        </div>
+
+        {% else %}
+
+        <div class="result_casesheet">
+
+            <h1>Casesheet name: {{casesheetname}}</h1>
+
+            {% for key, value in returndict.items %}
+            {% if value != None %}
+
+            {% if '$' in value %}
+
+            {% for point in value|split:"$" %}
+
+            <li>{{point}}</li>
+
+            {% endfor %}
+
+            {% else %}
+
+            <!-- <p>{{key}}: {{value}}</p> -->
+
+            {% if value|first == "Q" %}
+
+            <p class="question">{{value}}</p>
+
+            {% else %}
+
+            <p class="answer">{{value}}</p>
+
+            {% endif %}
+
+            {% endif %}
+
+            {% endif %}
+            {% endfor %}
+
+        </div>
+
+        {% endif %}
+    </div>
+</body>
+
+</html>

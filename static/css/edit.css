@@ -1,0 +1,224 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");
+
+* {
+    margin: 0px;
+    box-sizing: border-box;
+    padding: 0;
+    font-family: 'Nunito', sans-serif;
+    scroll-behavior: smooth;
+}
+
+/* body {
+    background-image: url('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBw0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ8NDQ0NFREWFhURFRUYHSggGBolGxUVITEhJSkrLi4uFx8zODMtNygtOisBCgoKDQ0NDg0NDisZFRkrKysrKzcrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrK//AABEIALcBEwMBIgACEQEDEQH/xAAYAAADAQEAAAAAAAAAAAAAAAAAAgMBB//EABgQAQEBAQEAAAAAAAAAAAAAAAABEQIS/8QAFgEBAQEAAAAAAAAAAAAAAAAAAAEC/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8A4lDwkPGg8PCQ/IKRTlOKciKcqcp8qcqinKnKcU5BTlTlPlTlUUh4Tk8A8PCw0ENAJQBaWmpaBKSnpKKTpPpTpPoE+k+lKn0ip9J9KdJ0E+k+lOk+hU+iU/RKgnS0/RKKUAAIeEh4B4eEh4CnJ+U+VeRFOVOUuVeVRTlTlPlTkFOVInypAU5PCQ/Ih4aFhooaCslGgKWttLQLSU9JUCdJ1TpOip9J9KdJdATpPpTpPoE+k+j9J9Ck6JT0lQJSU1LRSgABDwkNAUh4nD8iKcqcp8n5BXlTlLlTlRWKcpcq8iKcqRKKcgrD8p808oKSmicpoB9BdGg20tGsoMpKaktAtTp+qn1QJU+lKn0CfSfR+k+gJ0nVOkuhS1Po9JUCUlPSUUrWABDwkNAPDwkNBFZTxOH5BXlSJc1SKK8qcpc1TmiK81SVGVSUFYeVKU8oKSm1OVugrrNJrdA1pbWay0BaWi0loMpOq20loF6qfRuqSgTpOn6qdopek+j9J9IE6JT1OgWkp6SisDAAhoWGgHh4nDwFOTxOHgivNPzUuaeVRbmqc1HmqSgrKeVKU8oi0ppUpTygpKbUtbKCujU9boGtZaXWWg20trLS2gLSWi0nVAWp2tpLQL1SVtpLRS0lpuqnUGVOmpaBaSmpaKwMACGhDQDw8Th5QPDxOU0oisqkqMqkoKynlSh5VFZT81KU0oi0ppUpTSgr6bKnK3QU0ano0FPRbS2s0DWltZaW0G2ktFpLQFqdreqS0UWp2ttJ1UGWkrbSUGUtbaWilpa2loAMABsY2AaGhIaApDROU8oKQ8SlPKIrKeVKU0oKynlSlNKorKaVKU0oKa3U5W6Ipo0mjQPazSaNBtrNLazQbaS0WltFFpLRaS1AWktbaS0BaSttLQZSWtpaKysorAAAAAAGw0LGwDw8qcNKCkNE5TSiKQ8qUppQVlNKlKaUFZWypyt1RTW6nrZRFNGp63RT6zS+maIbWaW1lorbS2stLag20lotLaAtLaLS2gKSttLRWUtbS0BWAAAAAAABsYAPGwsbAPKaUkboKSmlSlNoKytlTlbKCsrZU5WyiKa3U9Ggpo0mjQPrNLrNA9rLS2s0G2stLazQbaW1lrLRRaWjWWgysopaArKGAAAAAAAAAAADWwrQNDSkjZQPK2UjdBTW6SVugeVuk1ugfW6TRoH0aXRoG1ml0aBtZpdZoG1lrNLaDbWWstYAtZRawBShgAAAAAAAAAAAAAAAANbCtA0rdK3QNrZSNA+tlJo0D63SaNA+jSa3QNrNZrNA2s1ms0G2s1mgANZrNAMDAAAAAAAAAAAAAAAAAAAAAAA0AG60AA0ABo1oBmt0AGaNAAAAGM0AGAAGAAAAAAAAAAAAAf/Z');
+    /* background-image: url('https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8Z3JhZGllbnR8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60'); 
+    background-size: cover;
+    background-color: #4A4E52;
+} */
+
+
+
+#information_container {
+    /* background-color: grey; */
+    display: grid;
+    color: white;
+    place-items: center;
+}
+
+.options_div {
+    display: flex;
+    justify-content: space-around;
+    height: auto;
+}
+
+#all_single_option_container {
+
+    background: rgba(29, 30, 34, 0.36);
+    border-radius: 16px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(9px);
+    border: 1px solid rgba(29, 30, 34, 0.7);
+    /* overflow: scroll; */
+    color: white;
+    height: 100%;
+    width: 45%;
+    /* overflow-y: scroll; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    border-radius: 12px;
+    margin: 15px;
+}
+
+
+#all_multiple_option_container {
+    border-radius: 16px;
+    box-shadow: 0 8px 32px 0 #6E3954;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(9px);
+
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.4);
+
+    height: 100%;
+    width: 45%;
+    margin: 15px;
+    display: flex;
+    flex-direction: column;
+    color: white;
+}
+
+input {
+    display: none;
+}
+
+.question_div {
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+#all_multiple_option_container .question {
+    width: 100%;
+}
+
+.single_select {
+    background-color: transparent;
+    padding: 5px;
+    color: white;
+    border-radius: 8px;
+    border: 2px solid rgba(255, 255, 255, 0.515);
+    /* padding-right: 35px; */
+
+}
+
+.multiple_select {
+    background-color: transparent;
+    padding: 5px;
+    color: white;
+    margin: 1px;
+    outline: 1px solid white;
+    border-radius: 8px;
+    /* padding-right: 35px; */
+
+}
+
+.multiple_select:hover {
+    background: rgba(29, 30, 34, 0.36);
+    /* background-image: url('https://em-content.zobj.net/thumbs/120/htc/37/down-pointing-small-red-triangle_1f53d.png'); */
+    /* background-position: right;
+    background-size: contain;
+    background-repeat: no-repeat; */
+    color: white;
+}
+
+.single_select:hover {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+.arrow_class {
+    background-image: url('https://em-content.zobj.net/thumbs/120/htc/37/down-pointing-small-red-triangle_1f53d.png');
+    background-position: right;
+    background-size: contain;
+    background-repeat: no-repeat;
+    padding-right: 35px;
+}
+
+select {
+    appearance: none;
+} 
+
+/* .multiple_select *
+{
+    background-color: aqua;
+    color: black;
+}
+
+.single_select *
+{
+    background-color: aqua;
+    color: black;
+} */
+
+select option {
+    background-color: cyan;
+    color: black;
+    /* padding: 15px; */
+}
+
+
+button {
+    color: #fff;
+    align-items: center;
+    justify-content: center;
+    background-image: linear-gradient(225deg,#5a5cd3,#a742d6);
+    padding: 16px 32px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 18px;
+    outline: none;
+    margin: 10px;
+    border: none;    
+}
+
+button:hover{
+    background-image: linear-gradient(225deg,#a742d6, #5a5cd3);
+}
+
+/* button::before {
+    content: "";
+    position: absolute;
+    background: #1cdada;
+    width: 8px;
+    top: 0;
+    bottom: 0;
+    left: -16px;
+    transform: rotate(-16deg);
+    filter: blur(6px);
+}
+
+button:hover::before {
+    left: calc(100% + 16px);
+    transition: 0.75s;
+} */
+body{
+    /* background-image: linear-gradient(
+  220deg,
+  hsl(240deg 17% 11%) 60%,
+  hsl(237deg 30% 19%) 83%,
+  hsl(236deg 37% 26%) 91%,
+  hsl(236deg 41% 35%) 95%,
+  hsl(237deg 43% 43%) 98%,
+  hsl(239deg 47% 52%) 99%,
+  hsl(263deg 42% 46%) 100%,
+  hsl(283deg 40% 39%) 101%,
+  hsl(302deg 36% 35%) 101%,
+  hsl(318deg 36% 34%) 100%,
+  hsl(329deg 32% 33%) 100%
+); */
+height: fit-content;
+background-color: #181822;
+background-size: cover;
+/* background-size: 100% 10%; */
+background-repeat: no-repeat;
+background-position: bottom;
+background-image: url('https://www.workninja.com/_next/static/media/landing_background.7cafc961.svg');
+
+}
+
+@media only screen and (max-width: 768px) {
+    .options_div{
+        align-items: center;
+        flex-direction: column;
+    }
+
+    #all_single_option_container, #all_multiple_option_container {
+        width: 75%;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    #all_single_option_container, #all_multiple_option_container {
+        width: 90%;
+    }
+}

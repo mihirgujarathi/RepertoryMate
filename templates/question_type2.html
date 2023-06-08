@@ -1,0 +1,74 @@
+
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Questions</title>
+  <link rel="stylesheet" href=" {% static 'css/type1.css' %}" />
+</head>
+
+<body>
+  <div class="container">
+    <div class="question">
+      <form method="POST" action="{% url 'question13' %}" id="questionform">
+        {% csrf_token %} Your Case Sheet Name: {{returndict.casesheetname}}
+        <br /><br />
+        {{returndict.question}}<br /><br />
+
+        {% for item in returndict.headingsWithOptions %}
+
+        <br />
+        {{item.0}}<br />
+
+        {%for option in item.1%}
+        <div class="qpb">
+          <div class="radio">
+            <label class="label" id="label-{{option}}"> {{option}}
+              <input type="checkbox" name="selectedoption" value="{{option}}" id="{{option}}" onclick="selectBut(id)" required/>
+          </div>
+        </div>
+        <br />
+        {%endfor%}
+
+        {% endfor %}<br />
+
+        <button onclick="updateAction()">Next</button>
+    </div>
+  </div>
+  <!-- HIDDEN INPUT  transferring casesheetname-->
+  <input type="hidden" value="{{returndict.casesheetname}}" name="currentscasesheetname" />
+  <input type="hidden" value="{{returndict.question}}" name="current_question" />
+  </form>
+
+  <script>
+
+    function updateAction() {
+      var fname = document.getElementById("questionform");
+      var qname = "{{returndict.question_name}}";
+      var actionlink = "{% url 'go_home' %}" + "main/" + qname + "/";
+      fname.action = actionlink;
+      fname.submit();
+    }
+
+    function selectBut(id) {
+        console.log(id);
+        var custom_item = "label-" + id;
+        var result = document.getElementById(custom_item);
+        if (result.style.backgroundColor == "red") {
+          result.style.backgroundColor = "black";
+        }
+        else {
+          result.style.backgroundColor = "red";
+        }
+      }
+
+  </script>
+  </div>
+   
+</body>
+
+</html>

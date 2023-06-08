@@ -1,0 +1,86 @@
+{%load static%}
+{% load post_tags %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Questions</title>
+  <script src="https://kit.fontawesome.com/4ac9ddbdf6.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href=" {% static 'css/type1.css' %}" />
+</head>
+
+<body>
+  <form method="POST" action="" id="questionform" class="container">
+    <div class="heading-container"> Your Case Sheet Name: {{data_dict.casesheetname}} </div>
+    <div class="message-container">
+      {% csrf_token %}
+      <input type="hidden" value="{{returndict.casesheetname}}" name="currentscasesheetname" />
+      <input type="hidden" value="{{returndict.question}}" name="current_question" />
+
+
+      <div class="bot messagebox">Welcome {{request.user.first_name}}</div>
+      <div class="bot messagebox">Enter the name of your casesheet</div>
+      <div class="user messagebox">{{data_dict.casesheetname}}</div>
+
+      {% for key, value in data_dict.items %}
+
+        {% if value != None %}
+
+          {% if '$' in value %}
+
+            <div class="option_tab">
+                {% for point in value|split:"$" %}
+                <div class="user messagebox">{{point}}</div>
+                {% endfor %}
+            </div>
+
+          {% else %}
+
+            {% if value|first == "Q" %}
+
+            <div class="bot messagebox">{{value}}</div>
+
+            {% else %}
+
+            <div class="user messagebox">{{value}}</div>
+
+            {% endif %}
+
+          {% endif %}
+        
+        {% endif %}
+
+      {% endfor %}
+
+      <div class="bot messagebox wiggle" id="current_question">Your Casesheet has been successfully saved. </div>
+      <!-- <div class="bot messagebox">Our majestic algorithm and our qualified doctors will assess your casesheet soon. </div> -->
+
+      <div class="user messagebox hide" id="empty_search">No results found</div>
+
+    </div>
+
+    <div class="input-bar">
+      <input type="text" class="input-box" placeholder="Go to home page (send to go to home page)" id="input-box" readonly>
+      <button class="send-btn" onclick="updateAction()">
+        <i class="fa-regular fa-paper-plane"></i>
+      </button>
+    </div>
+  </form>
+
+  <script defer>
+
+    document.getElementById('current_question').scrollIntoView()
+
+    function updateAction() {
+      window.open("{% url 'go_home' %}");
+    }
+
+  </script>
+  </div>
+
+</body>
+
+</html>

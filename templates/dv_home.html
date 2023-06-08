@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BBCR Data Visualization</title>
+    <link rel="stylesheet" href=" {% static 'css/dv_home.css' %}" />
+    <script src="https://kit.fontawesome.com/e7b026b0c8.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="container">
+        <a href="{%url 'go_home'%}"><i class="fa-solid fa-house fa-2xl" style="color: #ffffff;"></i> </a>
+        <h1>Data Visualization</h1>
+
+        <form method="POST" action="{% url 'dv_home' %}">
+            {% csrf_token %}
+
+            <input type="hidden" id="question_number" name="question_number" value="{{current_question}}">
+            <div class="select-container">
+                <div class="select">
+                    <input type="text" id="input" placeholder="Question Number" onfocus="this.blur();">
+                </div>
+                <div class="option-container">
+                    <div class="option">
+                        <label>Question 1</label>
+                    </div>
+                    <div class="option">
+                        <label>Question 2</label>
+                    </div>
+                    <div class="option">
+                        <label>Question 3</label>
+                    </div>
+                    <div class="option">
+                        <label>Question 4</label>
+                    </div>
+                    <div class="option">
+                        <label>Question 5</label>
+                    </div>
+                    <div class="option">
+                        <label>Question 6</label>
+                    </div>
+                    <div class="option">
+                        <label>Question 7</label>
+                    </div>
+                    <div class="option">
+                        <label>Question 8</label>
+                    </div>
+                    <div class="option">
+                        <label>Question 9</label>
+                    </div>
+                    <div class="option">
+                        <label>Question 10</label>
+                    </div>
+                    <div class="option">
+                        <label>Question 11</label>
+                    </div>
+                    <div class="option">
+                        <label>Question 12</label>
+                    </div>
+                    <div class="option">
+                        <label>Question 13</label>
+                    </div>
+                    <div class="option">
+                        <label>Question 14</label>
+                    </div>
+                    <div class="option">
+                        <label>Question 15</label>
+                    </div>
+                    <div class="option">
+                        <label>Question 16</label>
+                    </div>
+                    <div class="option">
+                        <label>Question 17</label>
+                    </div>
+                    <div class="option">
+                        <label>Question 18</label>
+                    </div>
+                    <div class="option">
+                        <label>Question 19</label>
+                    </div>
+                    <div class="option">
+                        <label>Question 20</label>
+                    </div>
+                    <div class="option">
+                        <label>Question 21</label>
+                    </div>
+                    <div class="option">
+                        <label>Question 22</label>
+                    </div>
+                    <div class="option">
+                        <label>Question 23</label>
+                    </div>
+                    <div class="option">
+                        <label>Question 24</label>
+                    </div>
+                    <div class="option">
+                        <label>Question 25</label>
+                    </div>
+                    <div class="option">
+                        <label>Question 26</label>
+                    </div>
+                    <div class="option">
+                        <label>Question 27</label>
+                    </div>
+                    <div class="option">
+                        <label>Question 28</label>
+                    </div>
+                    <div class="option">
+                        <label>Question 29</label>
+                    </div>
+                    <div class="option">
+                        <label>Question 30</label>
+                    </div>
+                    <div class="option">
+                        <label>Question 31</label>
+                    </div>
+                    <div class="option">
+                        <label>Question 32</label>
+                    </div>
+                    <div class="option">
+                        <label>Question 33</label>
+                    </div>
+                    <div class="option">
+                        <label>Question 34</label>
+                    </div>
+                    <div class="option">
+                        <label>Question 35</label>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+            <div class="radio-btn">
+                <div class="radio-inputs">
+                    <label>
+                        <input class="radio-input" type="radio" name="chart_type" id="bar" value="bar">
+                        <span class="radio-tile">
+                            <span class="radio-icon">
+                                <img width="94" height="94" src="https://img.icons8.com/3d-fluency/94/bar-chart.png"
+                                    alt="bar-chart" />
+                            </span>
+                            <span class="radio-label">Bar</span>
+                        </span>
+                    </label>
+                    <label>
+                        <input class="radio-input" type="radio" name="chart_type" id="pie" value="pie">
+                        <span class="radio-tile">
+                            <span class="radio-icon">
+                                <img width="94" height="94" src="https://img.icons8.com/3d-fluency/94/chart.png"
+                                    alt="chart" />
+                            </span>
+                            <span class="radio-label">Pie</span>
+                        </span>
+                    </label>
+                    <label>
+                        <input class="radio-input" type="radio" name="chart_type" id="donut" value="donut">
+                        <span class="radio-tile">
+                            <span class="radio-icon">
+                                <img width="94" height="94"
+                                    src="https://img.icons8.com/3d-fluency/94/doughnut-chart.png"
+                                    alt="doughnut-chart" />
+                            </span>
+                            <span class="radio-label">Donut</span>
+                        </span>
+                    </label>
+                </div>
+
+                <!-- <input type="radio" name="chart_type" id="bar" value="bar"><label for="bar">Bar</label><br>
+            <input type="radio" name="chart_type" id="pie" value="pie"><label for="pie">Pie</label><br>
+            <input type="radio" name="chart_type" id="donut" value="donut"><label for="donut">Donut</label> -->
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <button>Display
+                <div class="star-1">
+                    <svg xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 784.11 815.53"
+                        style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+                        version="1.1" xml:space="preserve" xmlns="http://www.w3.org/2000/svg">
+                        <defs></defs>
+                        <g id="Layer_x0020_1">
+                            <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+                            <path
+                                d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
+                                class="fil0"></path>
+                        </g>
+                    </svg>
+                </div>
+                <div class="star-2">
+                    <svg xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 784.11 815.53"
+                        style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+                        version="1.1" xml:space="preserve" xmlns="http://www.w3.org/2000/svg">
+                        <defs></defs>
+                        <g id="Layer_x0020_1">
+                            <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+                            <path
+                                d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
+                                class="fil0"></path>
+                        </g>
+                    </svg>
+                </div>
+                <div class="star-3">
+                    <svg xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 784.11 815.53"
+                        style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+                        version="1.1" xml:space="preserve" xmlns="http://www.w3.org/2000/svg">
+                        <defs></defs>
+                        <g id="Layer_x0020_1">
+                            <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+                            <path
+                                d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
+                                class="fil0"></path>
+                        </g>
+                    </svg>
+                </div>
+                <div class="star-4">
+                    <svg xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 784.11 815.53"
+                        style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+                        version="1.1" xml:space="preserve" xmlns="http://www.w3.org/2000/svg">
+                        <defs></defs>
+                        <g id="Layer_x0020_1">
+                            <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+                            <path
+                                d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
+                                class="fil0"></path>
+                        </g>
+                    </svg>
+                </div>
+                <div class="star-5">
+                    <svg xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 784.11 815.53"
+                        style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+                        version="1.1" xml:space="preserve" xmlns="http://www.w3.org/2000/svg">
+                        <defs></defs>
+                        <g id="Layer_x0020_1">
+                            <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+                            <path
+                                d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
+                                class="fil0"></path>
+                        </g>
+                    </svg>
+                </div>
+                <div class="star-6">
+                    <svg xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 784.11 815.53"
+                        style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+                        version="1.1" xml:space="preserve" xmlns="http://www.w3.org/2000/svg">
+                        <defs></defs>
+                        <g id="Layer_x0020_1">
+                            <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+                            <path
+                                d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
+                                class="fil0"></path>
+                        </g>
+                    </svg>
+                </div>
+            </button>
+        </form>
+
+        {% if chart %}
+        <div class="chart">
+            <img src="data:image/png;base64, {{chart|safe}}" alt="Graph Image Not Loaded"
+                style="border: 1px solid black">
+        </div>
+        {% endif %}
+    </div>
+
+
+    <script defer>
+        let selectContainer = document.querySelector(".select-container");
+        let select = document.querySelector(".select");
+        let input = document.getElementById("input");
+        let options = document.querySelectorAll(".select-container .option");
+        let hidden_question_number_input = document.getElementById("question_number");
+
+        select.onclick = () => {
+            selectContainer.classList.toggle("active");
+        };
+
+        options.forEach((e) => {
+            e.addEventListener("click", () => {
+                input.value = e.innerText;
+                hidden_question_number_input.value = e.innerText.replace("Question","q").replace(' ','');
+                selectContainer.classList.remove("active");
+                options.forEach((e) => {
+                    e.classList.remove("selected");
+                });
+                e.classList.add("selected");
+                console.log(e.innerText)
+            });
+        });
+    </script>
+
+
+</body>
+
+</html>
+
+
+<!-- <div class="dropdown-container"> -->
+
+<!-- <div class="dropdown">
+                <div class="select">
+                    <span class="selected">Occupation</span>
+                    <div class="caret"></div>
+                </div>
+                <ul class="menu">
+                    <li class="active">Genders</li>
+                    <li>Marital Status</li>
+                    <li>Occupation</li>
+                    <li>Height vs Weight (scatter plot)</li>
+                </ul>
+            </div>  -->
+
+<!-- <label>Personality</label>
+                <select name="value">
+                    <option value="sex">Genders</option>
+                    <option value="marital_status">Marital Status</option>
+                    <option value="occupation">Occupation</option>
+                    <option value="height_vs_weight">Height vs Weight (scatter plot)</Hption>
+                </select>
+                <b>OR</b> -->

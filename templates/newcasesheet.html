@@ -1,0 +1,69 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NewCaseSheet</title>
+  <link rel="stylesheet" href=" {% static 'css/type1.css' %}" />
+  <script src="https://kit.fontawesome.com/4ac9ddbdf6.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <form method="POST" action="{%url 'createcasesheet'%}" class="container">
+    <div class = "heading-container"> Your Case Sheet Name will be displayed here </div>
+    {% csrf_token %}
+
+    <!-- <h2>{{casesheetname}}</h2> -->
+    {% if error_message %}
+    <input type="hidden" value="{{casesheetname}}" name="casesheetnameconfirm">
+    <!-- <label> {{error_message}} <br>
+      <input type="button" onclick="history.back()" value="No">
+      <input type="submit" name="updateCase" action="{%url 'createcasesheet'%}" value="Yes"> -->
+
+
+    <div class="message-container">
+      <div class="bot messagebox">Welcome {{request.user.first_name}}</div>
+      <div class="bot messagebox">Enter the name of your casesheet</div>
+      <div class="user messagebox">{{casesheetname}}</div>
+      <div class="bot messagebox">{{error_message}}</div>
+    </div>
+
+    <div class="input-bar2">
+      <!-- <input type="text" class="input-box" name="casesheetname" placeholder="Enter your casesheet name" id="input-box"> -->
+      <input type="button" class="opt-btn" onclick="history.back()" value="No">
+      <input type="submit" class="opt-btn" name="updateCase" action="{%url 'createcasesheet'%}" value="Yes">
+      <!-- <button class="send-btn" name="newCase">
+        <i class="fa-regular fa-paper-plane"></i>
+      </button> -->
+    </div>
+
+    {% else %}
+    <!-- <input
+      type="text"
+      name="casesheetname"
+      placeholder="Enter your case sheet"
+      />
+      <button name="newCase">Submit</button> -->
+
+    <div class="message-container">
+      {% comment %} <span> Your Case Sheet Name will be displayed here </span> {% endcomment %}
+      <div class="bot messagebox">Welcome {{request.user.first_name}}</div>
+      <div class="bot messagebox">Enter the name of your casesheet</div>
+    </div>
+
+    <div class="input-bar">
+      <input type="text" class="input-box" name="casesheetname" placeholder="Enter your casesheet name" id="input-box">
+      <button class="send-btn" name="newCase">
+        <i class="fa-regular fa-paper-plane"></i>
+      </button>
+    </div>
+
+    {% endif %}
+  </form>
+
+</body>
+
+</html>
